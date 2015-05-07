@@ -32,7 +32,6 @@
                             exp_month: $('#edit-panes-payment-details-cc-exp-month').val(),
                             exp_year: $('#edit-panes-payment-details-cc-exp-year').val()
                         }, function (status, response) {
-                            alert(response.error);
                             if (response.error) {
 
                                 // Show the errors on the form
