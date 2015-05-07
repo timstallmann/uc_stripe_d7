@@ -5,13 +5,6 @@ dependencies[] = uc_credit
 dependencies[] = libraries
 dependencies[] = uc_optional_checkout_review
 package = Ubercart - payment
-core = 6.x
+core = 7.x
 php = 5.2
-
-
-; Information added by Drupal.org packaging script on 2015-03-08
-version = "6.x-2.x-dev"
-core = "6.x"
-project = "uc_stripe"
-datestamp = "1425848883"
 
