@@ -56,15 +56,21 @@ function uc_stripe_recurring_info() {
  *
  * @param $form
  * @param $form_state
+ * @param $form_id
  */
-function uc_stripe_form_uc_cart_checkout_form_alter(&$form, &$form_state) {
+function uc_stripe_form_uc_cart_checkout_form_alter(&$form, &$form_state, $form_id) {
 
   // Prevent form submission if javascript has not enabled the button.
   // If JS happens to be disabled, we don't want user to be able to submit.
   $form['continue']['#disabled'] = TRUE;
 
   //Add stripe.js
-  drupal_add_html_head('<script type="text/javascript" src="https://js.stripe.com/v2/"></script>');
+  $stripe_head_script = array(
+    '#type' => 'markup',
+    '#markup' => '<script type="text/javascript" src="https://js.stripe.com/v2/"></script>',
+  );
+
+  drupal_add_html_head($stripe_head_script, 'stripe-external-js');
 
 
   $apikey = variable_get('uc_stripe_testmode', TRUE) ? variable_get('uc_stripe_api_key_test_publishable', '') : variable_get('uc_stripe_api_key_live_publishable', '');
