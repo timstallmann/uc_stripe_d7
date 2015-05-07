@@ -64,7 +64,7 @@ function uc_stripe_form_uc_cart_checkout_form_alter(&$form, &$form_state) {
   $form['continue']['#disabled'] = TRUE;
 
   //Add stripe.js
-  drupal_set_html_head('<script type="text/javascript" src="https://js.stripe.com/v2/"></script>');
+  drupal_add_html_head('<script type="text/javascript" src="https://js.stripe.com/v2/"></script>');
 
 
   $apikey = variable_get('uc_stripe_testmode', TRUE) ? variable_get('uc_stripe_api_key_test_publishable', '') : variable_get('uc_stripe_api_key_live_publishable', '');
@@ -622,8 +622,8 @@ function uc_stripe_theme_registry_alter(&$theme_registry) {
  */
 function uc_stripe_uc_payment_method_credit_form($form) {
   $output = drupal_render($form['stripe_nojs_warning']);
-  $output = drupal_render($form['config_error']);
-  $output .= theme_uc_payment_method_credit_form($form);
+  $output .= drupal_render($form['config_error']);
+  $output .= theme('uc_payment_method_credit_form',$form);
   $output .= drupal_render($form['stripe_token']);
   $output .= drupal_render($form['dummy_image_load']);
 
