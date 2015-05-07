@@ -274,7 +274,7 @@ function uc_stripe_charge($order_id, $amount, $data) {
     'prec' => 2,
   );
 
-  $amount = uc_price($amount, $context, $options);
+  $amount = uc_currency_format($amount, FALSE, FALSE, '.');
 
   $stripe_customer_id = FALSE;
 
