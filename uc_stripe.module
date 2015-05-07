@@ -236,9 +236,7 @@ function uc_stripe_settings_form() {
  * @param $form_state
  */
 function uc_stripe_checkout_form_customsubmit($form, &$form_state) {
-  // I do not understand why this is not in $form_state['values']
-  // Reaching into $_POST is not "normal". but can't find it otherwise.
-  $_SESSION['stripe']['token'] = $_POST['stripe_token'];
+  $_SESSION['stripe']['token'] = $form_state['values']['panes']['payment']['details']['stripe_token'];
 }
 
 
