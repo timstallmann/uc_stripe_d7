@@ -13,7 +13,7 @@
  * Implements hook_payment_gateway to register this payment gateway
  * @return array
  */
-function uc_stripe_payment_gateway() {
+function uc_stripe_uc_payment_gateway() {
   $gateways = array();
   $gateways[] = array(
     'id' => 'uc_stripe',
@@ -109,7 +109,7 @@ function uc_stripe_form_uc_cart_checkout_form_alter(&$form, &$form_state) {
  *
  * @return array
  */
-function uc_stripe_order_pane() {
+function uc_stripe_uc_order_pane() {
   $panes[] = array(
     'id' => 'uc_stripe',
     'callback' => 'uc_stripe_order_pane_stripe',
