@@ -582,24 +582,28 @@ function _uc_stripe_get_customer_id($uid) {
  * @param $form_id
  */
 function uc_stripe_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'uc_payment_method_credit_form') {
+  if ($form_id == 'uc_cart_checkout_form') {
+
+    $payment_form = &$form['panes']['payment']['details'];
 
     // Make sure tp properly prepare the CC form. Because so much is done
     // by AJAX on this page, do this again on cc number change.
-    $form['cc_number']['#attributes']['onchange'] = 'uc_stripe_clean_cc_form()';
+    $payment_form['cc_number']['#attributes']['onchange'] = 'uc_stripe_clean_cc_form()';
 
-    $form['stripe_nojs_warning'] = array(
+    $payment_form['stripe_nojs_warning'] = array(
       '#type' => 'item',
       '#value' => '<span id="stripe-nojs-warning" class="stripe-warning">' . t('Sorry, for security reasons your card cannot be processed because Javascript is disabled in your browser.') . '</span>',
       '#weight' => -1000,
     );
-    $form['stripe_token'] = array(
+
+    $payment_form['stripe_token'] = array(
       '#type' => 'hidden',
       '#maxlength' => 64,
     );
+
     if (!module_exists('uc_optional_checkout_review') || !variable_get('uc_checkout_skip_review', FALSE)) {
-      unset ($form['cc_number'], $form['cc_cvv']);
-      $form['config_error'] = array(
+      unset ($payment_form['cc_number'], $payment_form['cc_cvv']);
+      $payment_form['config_error'] = array(
         '#type' => 'markup',
         '#value' => t('<span class="stripe-warning">Misconfiguration of cart checkout, see status page</span>'),
       );
